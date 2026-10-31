@@ -84,7 +84,7 @@ export const PlagiarismDetectorView: React.FC = () => {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
-    fetch('http://localhost:8000/health')
+    fetch(`${API_BASE_URL}/health`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'online') setBackendStatus('connected');
@@ -107,7 +107,7 @@ export const PlagiarismDetectorView: React.FC = () => {
   const loadDemoData = async () => {
     setIsUploading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/demo-data');
+      const res = await fetch(`${API_BASE_URL}/api/demo-data`);
       if (!res.ok) throw new Error('Backend failed');
       const data: PlagiarismReport = await res.json();
       setReport(data);
@@ -131,7 +131,7 @@ export const PlagiarismDetectorView: React.FC = () => {
     });
 
     try {
-      const res = await fetch('http://localhost:8000/api/check-plagiarism', {
+      const res = await fetch(`${API_BASE_URL}/api/check-plagiarism`, {
         method: 'POST',
         body: formData
       });
