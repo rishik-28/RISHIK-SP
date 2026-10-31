@@ -81,6 +81,8 @@ export const PlagiarismDetectorView: React.FC = () => {
   const [backendStatus, setBackendStatus] = useState<'checking' | 'connected' | 'offline'>('checking');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+
   useEffect(() => {
     fetch('http://localhost:8000/health')
       .then(res => res.json())
